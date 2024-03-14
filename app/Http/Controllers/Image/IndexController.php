@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Image;
 
+use App\Actions\Image\GetImagesAction;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Repositories\IndexRepositories;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     protected IndexRepositories $indexRepositories;
+
     public function __construct(IndexRepositories $indexRepositories)
     {
         $this->indexRepositories = $indexRepositories;
@@ -26,5 +28,10 @@ class IndexController extends Controller
     {
         $response = $this->indexRepositories->getByObject(new Image(), $id);
         return $this->OkResponse($response, 'image');
+    }
+
+    public function getImages(GetImagesAction $action)
+    {
+        return $action->execute();
     }
 }

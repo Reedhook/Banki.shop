@@ -20,4 +20,6 @@ Route::group(['prefix'=>'images'], function (){
     Route::get('', [IndexController::class, 'index'])->name('image.index');
     Route::get('{id}', [IndexController::class, 'show'])->name('image.show');
 });
+Route::get('/getImages', [IndexController::class, 'getImages'])->name('image.getImages');
+
 Route::get('test', function (){ return 1;});

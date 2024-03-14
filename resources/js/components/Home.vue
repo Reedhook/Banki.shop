@@ -23,6 +23,8 @@ export default {
                     }
                 })
                     .then(res => {
+                        alert('Изображения были загружены')
+                        this.images =null;
                         console.log(res);
                     })
                     .catch(error => {
