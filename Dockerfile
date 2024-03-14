@@ -6,7 +6,14 @@ RUN apt-get update && \
     libzip-dev \
     zip \
     libpq-dev \
+    imagemagick \
     && docker-php-ext-install pdo_mysql
+
+# Установка и активация Imagick расширения
+RUN apt-get install -y libmagickwand-dev --no-install-recommends \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
+
 RUN a2enmod rewrite
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
