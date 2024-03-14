@@ -5,9 +5,13 @@ export default {
         selectImages(e) {
             const file = e.target.files[0];
             const isDuplicate = this.images.some(image => image.name === file.name);
-
-            if (!isDuplicate) {
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif']; // Разрешенные типы изображений
+            if (this.images.length >= 5) {
+                alert('Максимум 5 файлов');
+            } else if (!isDuplicate && allowedTypes.includes(file.type)) {
                 this.images.push(file);
+            } else if(isDuplicate) {
+                alert('Пожалуйста, выберите только изображения (jpeg, png, gif, jpg)');
             }
 
         },
@@ -43,6 +47,12 @@ export default {
 
 <template>
     <div class="container">
+        <div>
+            <div class="row">
+                <router-link :to="{name:'result'}">Result</router-link>
+            </div>
+        </div>
+
         <div>
             <label for="image-upload" style="font-size: 16px; color: #333; margin-bottom: 10px;">Select Images:</label>
             <input type="file" id="image-upload" multiple @change="selectImages" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
