@@ -10,7 +10,7 @@ class DbServices implements DataServiceInterface
 {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function create($model, $dto): Model
     {
