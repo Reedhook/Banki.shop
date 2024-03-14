@@ -3,9 +3,7 @@
 namespace App\Actions\Image;
 
 use App\Dto\ImageDto;
-use App\Models\Image;
 use App\Services\FileService;
-use Ramsey\Uuid\Uuid;
 
 class UploadImageAction
 {

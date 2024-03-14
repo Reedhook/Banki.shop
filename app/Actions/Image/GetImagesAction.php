@@ -10,7 +10,7 @@ class GetImagesAction
     public function execute()
     {
         $files = Storage::files('public/images'); // Путь к папке c изображениями
-        $previewFiles = collect($files)->map(function($file) {
+        $previewFiles = collect($files)->map(function ($file) {
             $filename = basename($file);
             $originalFilename = str_replace(['preview_', 'original_'], '', $filename);
 
@@ -19,6 +19,7 @@ class GetImagesAction
 
             $data = [
                 'name' => $imageData ? $imageData->name : 'Нет данных в базе данных',
+                'created_at' => $imageData->created_at,
             ];
 
             if (str_contains($filename, 'original_')) {
@@ -29,12 +30,13 @@ class GetImagesAction
 
             return $data;
         })->groupBy('name')->map(function ($group) {
-            $mergedData = $group->reduce(function($carry, $item) {
+            $mergedData = $group->reduce(function ($carry, $item) {
                 return array_merge($carry, $item);
             }, []);
 
             return $mergedData;
-        });
+        })->sortBy('name')->values(); // sortBy для сортировки по имени и values() для переиндексации массива
+        ;
 
         return response()->json(['files' => $previewFiles]);
     }
