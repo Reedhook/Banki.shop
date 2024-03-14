@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="app">
-    <home-component></home-component>
+    <index-component></index-component>
 </div>
 </body>
 </html>

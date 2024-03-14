@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Image\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix'=>'images'], function (){
     Route::post('/upload', [\App\Http\Controllers\Image\CreateController::class, 'store'])->name('image.store');
+    Route::get('', [IndexController::class, 'index'])->name('image.index');
+    Route::get('{id}', [IndexController::class, 'show'])->name('image.show');
 });
 Route::get('test', function (){ return 1;});
